@@ -40,7 +40,7 @@
         if (printFuncs[i]) {
           printFuncs[i]();
           printFuncs[i] = "DONE";
-        }
+        } else return;
       }
     };
   })();
