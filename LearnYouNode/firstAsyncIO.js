@@ -1,5 +1,7 @@
 var fs = require('fs');
 
+var path = process.argv[2];
+
 function callback(err, data) {
   var lineCount = 0;
   var i;
@@ -11,5 +13,4 @@ function callback(err, data) {
   console.log(lineCount);
 }
 
-var path = process.argv[2];
 fs.readFile(path, 'utf8', callback);

@@ -1,5 +1,7 @@
 module.exports = function (dirPath, extension, callback) {
-  require('fs').readdir(dirPath, function(err, files) {
+  var fs = require('fs');
+
+  fs.readdir(dirPath, function(err, files) {
     var lastIndex;
   
     if (err) { 

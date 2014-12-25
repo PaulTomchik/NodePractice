@@ -13,5 +13,4 @@ function callback (err, list) {
   });
 }
 
-
 fs.readdir(dirPath, callback);

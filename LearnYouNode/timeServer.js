@@ -1,22 +1,22 @@
-(function() {
-  var portNum = process.argv[2];
+var net = require('net');
 
-  function zeroPad(num) {
-    return ('0' + num).slice(-2);
-  }
+var portNum = process.argv[2];
 
-  function getTimeString () {
-    var date = new Date();
+function zeroPad(num) {
+  return ('0' + num).slice(-2);
+}
 
-    return date.getFullYear() + '-' +
-           zeroPad(1 + date.getMonth()) + '-' +
-           zeroPad(date.getDate()) + ' ' +
-           zeroPad(date.getHours()) + ':' +
-           zeroPad(date.getMinutes()) + '\n';
-  }
+function getTimeString () {
+  var date = new Date();
 
-  var server = require('net').createServer( function (socket) {
-    socket.end(getTimeString()); 
-  });
-  server.listen(portNum);
-})();
+  return date.getFullYear() + '-' +
+         zeroPad(1 + date.getMonth()) + '-' +
+         zeroPad(date.getDate()) + ' ' +
+         zeroPad(date.getHours()) + ':' +
+         zeroPad(date.getMinutes()) + '\n';
+}
+
+var server = net.createServer( function (socket) {
+  socket.end(getTimeString()); 
+});
+server.listen(portNum);
