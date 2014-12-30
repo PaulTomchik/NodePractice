@@ -1,18 +1,20 @@
-(function () {
-  module.exports = function (counter) {
+module.exports = function (counter) {
 
-    var countries = {},
-        wStream;
+	var through  = require('through'),
+			duplexer = require('duplexer');
 
-    function tallyCountries (data) {
-      countries[data.country] = (countries[data.country] || 0) + 1;  
-    }
+  var countries = {},
+      wStream;
 
-    function end () {
-      counter.setCounts(countries);
-    }
+  function tallyCountries (data) {
+    countries[data.country] = (countries[data.country] || 0) + 1;
+  }
 
-    wStream = require('through')(tallyCountries, end);
-    return require('duplexer')(wStream, counter);
-  };
-})();
+  function end () {
+    counter.setCounts(countries);
+  }
+
+  wStream = through(tallyCountries, end);
+
+  return duplexer(wStream, counter);
+};
